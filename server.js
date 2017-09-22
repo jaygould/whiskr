@@ -8,7 +8,6 @@ const compression = require('compression');
 const errorHandler = require('errorhandler');
 const lusca = require('lusca');
 const expressStatusMonitor = require('express-status-monitor');
-
 const bodyParser = require('body-parser');
 const mongoUtil = require('./util/mongo');
 
@@ -16,6 +15,7 @@ const mongoUtil = require('./util/mongo');
 require('dotenv').config();
 
 //Route handlers
+const indexController = require('./controllers/index');
 const homeController = require('./controllers/home');
 
 //Create server
@@ -25,7 +25,7 @@ const app = express();
 //mongoUtil.connectToServer();
 
 //Express configuration
-app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
+app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 1137);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(expressStatusMonitor());
@@ -44,7 +44,8 @@ app.use(
 app.use(errorHandler());
 
 //App routes
-app.get('/', homeController.index);
+app.get('/', indexController.index);
+app.get('/home', homeController.index);
 
 app.listen(app.get('port'), () => {
 	console.log(

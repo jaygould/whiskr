@@ -1,0 +1,44 @@
+@font-face {
+	font-family: 'adorable';
+	src: url('./../fonts/adorable.otf');
+}
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	--color1: #d6276a;
+	--color2: #23a6d5;
+	--color3: #23d5ab;
+	background: linear-gradient(
+		-45deg,
+		var(--color1),
+		var(--color2),
+		var(--color3)
+	);
+	background-size: 400% 400%;
+	animation: Gradient 60s ease infinite;
+}
+a {
+	color: #ffffff;
+}
+a:hover {
+	color: #e3e3e3;
+}
+h1 {
+	font-family: 'adorable';
+	font-size: 4em;
+}
