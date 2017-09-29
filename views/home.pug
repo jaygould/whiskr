@@ -2,11 +2,11 @@ extends layout
 
 block content
 
-  #cardWrap
-    .imgWrap
-      img.card(src='/img/ct1.jpg')
-    .imgWrap
-      img.card(src='/img/ct2.jpg')
+  .mainWrap
+    
+    #cardWrap
 
-  .yesnoBtnWrap
-    include partials/yesnoBtnWrap
+    img.spinner(src='/img/spinner.svg')
+
+    .yesnoBtnWrap
+      include partials/yesnoBtnWrap

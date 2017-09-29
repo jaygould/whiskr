@@ -17,12 +17,14 @@ require('dotenv').config();
 //Route handlers
 const indexController = require('./controllers/index');
 const homeController = require('./controllers/home');
+const apiController = require('./controllers/api');
 
 //Create server
 const app = express();
 
-//Connect to database
-//mongoUtil.connectToServer();
+mongoUtil.connectToServer(err => {
+	if (err) return console.log(err);
+});
 
 //Express configuration
 app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 1137);
@@ -46,6 +48,9 @@ app.use(errorHandler());
 //App routes
 app.get('/', indexController.index);
 app.get('/home', homeController.index);
+
+//API routes
+app.use('/api', apiController);
 
 app.listen(app.get('port'), () => {
 	console.log(

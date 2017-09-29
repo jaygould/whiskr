@@ -20,6 +20,7 @@ body {
   height: 100%; }
 
 body {
+  overflow-x: hidden;
   --color1: #d6276a;
   --color2: #23a6d5;
   --color3: #23d5ab;
@@ -65,17 +66,35 @@ h1 {
   .enterWrap .enterBtn {
     padding: 20px 40px; }
 
+.mainWrap {
+  position: relative; }
+  .mainWrap .spinner {
+    z-index: 10;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translateZ(0) translateX(-50%); }
+
 #cardWrap {
   opacity: 0;
   overflow: auto; }
   #cardWrap .imgWrap {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%); }
+    transform: translateZ(0) translateX(-50%);
+    transition: transform 100ms; }
     #cardWrap .imgWrap .card {
       object-fit: cover;
       width: 350px;
       height: 450px; }
+    #cardWrap .imgWrap.spinOutYes {
+      transform: translateX(100%) translateY(-100px) rotate(10deg);
+      opacity: 0;
+      transition: all 400ms ease-in-out; }
+    #cardWrap .imgWrap.spinOutNo {
+      transform: translateX(-150%) translateY(-100px) rotate(-10deg);
+      opacity: 0;
+      transition: all 400ms ease-in-out; }
 
 #cardWrap.show {
   transition: opacity 300ms cubic-bezier(1, -0.27, 1, 1.2);
@@ -104,10 +123,10 @@ h1 {
       color: #eee;
       transform: scale(1.1); }
   .yesnoBtnWrap .yes {
-    margin-right: 30px;
+    margin-left: 30px;
     background: #28bf21; }
   .yesnoBtnWrap .no {
-    margin-left: 30px;
+    margin-right: 30px;
     background: #da1919; }
 
 .yesnoBtnWrap.show {
