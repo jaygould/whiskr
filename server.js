@@ -18,6 +18,7 @@ require('dotenv').config();
 const indexController = require('./controllers/index');
 const homeController = require('./controllers/home');
 const apiController = require('./controllers/api');
+const scraperController = require('./controllers/scraper');
 
 //Create server
 const app = express();
@@ -51,6 +52,7 @@ app.get('/home', homeController.index);
 
 //API routes
 app.use('/api', apiController);
+app.use('/scraper', scraperController);
 
 app.listen(app.get('port'), () => {
 	console.log(
