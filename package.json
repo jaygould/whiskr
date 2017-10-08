@@ -23,6 +23,7 @@
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "https": "1.0.0",
+    "inquirer": "3.3.0",
     "jimp": "0.2.28",
     "lodash": "4.17.4",
     "lusca": "1.5.1",
@@ -33,7 +34,8 @@
     "path": "0.12.7",
     "pug": "2.0.0-rc.4",
     "request": "2.83.0",
-    "shortid": "2.2.8"
+    "shortid": "2.2.8",
+    "socket.io": "2.0.3"
   },
   "devDependencies": {
     "autoprefixer": "7.1.4",

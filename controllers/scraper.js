@@ -1,10 +1,8 @@
 const express = require('express');
-const _ = require('lodash');
-const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
+const chalk = require('chalk');
 const router = express.Router();
-const Card = require('../util/Cards');
 const scrape = require('./scraper/index');
 
 router.get('/scrape', (req, res) => {
@@ -12,57 +10,46 @@ router.get('/scrape', (req, res) => {
 	request(url, function(error, response, html) {
 		if (!error) {
 			var $ = cheerio.load(html);
-
 			let photos = [];
 			const imgWraps = $('.photos').children();
 			$(imgWraps).each((i, elem) => {
 				if ($(elem).attr('class') == 'photo-item') {
 					let url = $(elem).find('.photo-item__img').attr('src');
-					let urlSplit = url.split('?');
 					photos.push(url);
 				}
 			});
 
-			//send browser request here?
-			//res.send('<h1>Hello world</h1>');
+			//send file contaning client side socket script to begin
+			res.sendFile(__dirname + '/scraper/scrape.html');
 
-			//do promise based approval...
-			//res.setHeader('Content-Type', 'text/html');
 			let prom = Promise.resolve();
+			let promArr = [];
 			photos.forEach(photo => {
 				prom = prom.then(function() {
 					return scrape.getUserApproval(photo, res, req);
 				});
+				promArr.push(prom);
 			});
 
-			//console.log(photos);
+			Promise.all(promArr).then(() => {
+				//delete all images in temp
+				scrape
+					.emptyTemp()
+					.then(() => {
+						console.log(
+							'%s all images have been processed.',
+							chalk.green('Success: ')
+						);
+					})
+					.catch(e => {
+						console.log(
+							'%s the target directory or file may not exist. Please check the parameters of the function or delete the temporary files manually.',
+							chalk.red('Failed: ')
+						);
+					});
+			});
 		}
 	});
 });
 
-// photos[i] = urlSplit[0] + '?' + urlSplit[1];
-// request.get(
-// 	{ url: photos[i], encoding: 'binary' },
-// 	(err, response, body) => {
-// 		if (err) throw err;
-// 		//if user selects yes...
-// 		scrape.test();
-// 		fs.writeFile(`${i}.jpeg`, body, 'binary', err => {
-// 			if (err) throw err;
-// 		});
-// 		//else
-// 		//nothing....
-// 	}
-// );
-
 module.exports = router;
-
-// Inserting cards for testing
-//
-// let card = new Card();
-// card.url = `${process.env.API_URL}/catImages/ct4.jpg`;
-// card.imageid = 'q';
-// card.save((err, saved) => {
-// 	if (err) return console.log(err);
-// 	console.log(saved);
-// });
