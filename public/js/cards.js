@@ -20,11 +20,7 @@ const _clickYes = () => {
 		'yes'
 	);
 	topCard.classList.add('spinOutYes');
-	topCard.addEventListener('transitionend', e => {
-		if (e.propertyName != 'transform') return;
-		cardWrap.removeChild(topCard);
-		_getNewCard();
-	});
+	popCard(topCard, 'yes');
 };
 const _clickNo = () => {
 	let topCard = cardWrap.lastChild;
@@ -33,11 +29,32 @@ const _clickNo = () => {
 		'no'
 	);
 	topCard.classList.add('spinOutNo');
+	popCard(topCard, 'no');
+};
+
+const popCard = (topCard, yesorno) => {
+	applyVoteCount(
+		topCard.getElementsByClassName('card')[0].getAttribute('data-votecount'),
+		yesorno
+	);
 	topCard.addEventListener('transitionend', e => {
 		if (e.propertyName != 'transform') return;
 		cardWrap.removeChild(topCard);
 		_getNewCard();
 	});
+};
+const applyVoteCount = (voteCount, yesorno) => {
+	let voteString = yesorno == 'yes' ? 'yays' : 'nays';
+	mainWrap.getElementsByClassName(
+		'voteCount'
+	)[0].innerHTML = `<span class="voteInner ${yesorno}">${voteCount} ${voteString}</span>`;
+	let voteInner = mainWrap.getElementsByClassName('voteInner')[0];
+	setTimeout(() => {
+		voteInner.classList.add('popVote');
+		voteInner.addEventListener('transitionend', e => {
+			//no need to hide the count anymore?
+		});
+	}, 100);
 };
 
 const _getNewCard = () => {
@@ -62,7 +79,7 @@ const _randomRotateCard = element => {
 const _insertCard = (cardObj, isInitialLoad) => {
 	cardWrap.insertAdjacentHTML(
 		'afterbegin',
-		`<div class="imgWrap"><img class="card" data-id="${cardObj._id}" src="${cardObj.url}"></div>`
+		`<div class="imgWrap"><img class="card" data-votecount="${cardObj.voteCount}" data-id="${cardObj._id}" src="${cardObj.url}"></div>`
 	);
 	//if it's the first load, the cardaccum array is already populated, so only do it here on each new card insert
 	if (isInitialLoad) return;

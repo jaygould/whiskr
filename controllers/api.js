@@ -8,14 +8,27 @@ const Vote = require('../util/Votes');
 router.post('/card/getFirstCards', (req, res) => {
 	Card.find({}).exec((err, cards) => {
 		if (err) res.status(400).send(err);
-		//randomly sort cards and send back the first few random for initial view
+		//shuffle the cards to get random order
 		let cardsShuffled = _.shuffle(cards);
 		let startingCards = [];
 		cardsShuffled.forEach((card, index) => {
-			if (index >= 2) return;
+			//start with 3 cards only and use that random 3 card array
+			if (index >= 3) return;
 			startingCards.push(card);
 		});
-		res.status(200).send(startingCards);
+		//loop through the initial cards and use Promises to assist in retrieving the card vote count
+		let promiseArr = startingCards.map(card => {
+			return new Promise(resolve => {
+				_getCardVoteCount(card, results => {
+					card = card.toJSON();
+					card.voteCount = results;
+					resolve(card);
+				});
+			});
+		});
+		Promise.all(promiseArr).then(values => {
+			res.status(200).send(values);
+		});
 	});
 });
 
@@ -33,9 +46,16 @@ router.post('/card/getNextCard', (req, res) => {
 			chosenCard = cardsShuffled[i];
 			break;
 		}
-		chosenCard
-			? res.status(200).send(chosenCard)
-			: res.status(200).send({ refresh: true });
+		if (chosenCard) {
+			//get count of votes for chosen card
+			_getCardVoteCount(chosenCard, (results, err) => {
+				chosenCard = chosenCard.toJSON();
+				chosenCard.voteCount = results;
+				res.status(200).send(chosenCard);
+			});
+		} else {
+			res.status(200).send({ refresh: true });
+		}
 	});
 });
 
@@ -56,12 +76,17 @@ router.post('/card/markCard', (req, res) => {
 
 module.exports = router;
 
-// Inserting cards for testing
-//
-// let card = new Card();
-// card.url = `${process.env.API_URL}/catImages/ct4.jpg`;
-// card.imageid = 'q';
-// card.save((err, saved) => {
-// 	if (err) return console.log(err);
-// 	console.log(saved);
-// });
+const _getCardVotes = (cardid, cb) => {
+	Vote.find({
+		cardid: cardid
+	}).exec((err, results) => {
+		cb(results, err);
+	});
+};
+const _getCardVoteCount = (card, cb) => {
+	_getCardVotes(card._id, (results, err) => {
+		if (err) return err;
+		const voteCount = results.length ? results.length : 0;
+		cb(voteCount);
+	});
+};

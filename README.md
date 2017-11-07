@@ -1,5 +1,6 @@
 # Cat Swipe
 
+## Random notes for dev
 
 * Place divs on top of each other in middle of screen
 * Rotate the divs btween 2 angles and positioned slightly differently so it looks liek they are stacked
@@ -14,3 +15,12 @@
 
 * Need to hide and show spinner when loading
 * Flex didnt work
+
+## To do
+
+> * Link up voting and cards tables so each card displays the number of yes or no answers after user has cohsen theirs (animates in and out on click of yes or no)
+* Add something to the UI to give it a bit of character... also update button styling as it crap atm
+* Mobile responsiveness
+* Swipe gesture and havr card follow the finger
+* Link up to heroku domain
+* Internet connection sutff
