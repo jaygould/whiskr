@@ -14,7 +14,9 @@ router.get('/scrape', (req, res) => {
 			const imgWraps = $('.photos').children();
 			$(imgWraps).each((i, elem) => {
 				if ($(elem).attr('class') == 'photo-item') {
-					let url = $(elem).find('.photo-item__img').attr('src');
+					let url = $(elem)
+						.find('.photo-item__img')
+						.attr('src');
 					photos.push(url);
 				}
 			});
@@ -41,7 +43,7 @@ router.get('/scrape', (req, res) => {
 							chalk.green('Success: ')
 						);
 					})
-					.catch(e => {
+					.catch(() => {
 						console.log(
 							'%s the target directory or file may not exist. Please check the parameters of the function or delete the temporary files manually.',
 							chalk.red('Failed: ')

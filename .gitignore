@@ -1,6 +1,7 @@
 #Custom
 public/catImages
 public/dist
+public/dist/*
 public/temp
 
 lib-cov

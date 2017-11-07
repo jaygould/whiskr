@@ -1,7 +1,9 @@
 const express = require('express');
 const _ = require('lodash');
 const router = express.Router();
+const chalk = require('chalk');
 const Card = require('../util/Cards');
+const Vote = require('../util/Votes');
 
 router.post('/card/getFirstCards', (req, res) => {
 	Card.find({}).exec((err, cards) => {
@@ -38,8 +40,18 @@ router.post('/card/getNextCard', (req, res) => {
 });
 
 router.post('/card/markCard', (req, res) => {
-	console.log('mark card');
-	res.send('');
+	let vote = new Vote();
+	vote.cardid = req.body.cardid;
+	vote.vote = req.body.yesorno;
+	vote.save(err => {
+		if (err) res.status(400).send(err);
+		console.log(
+			'%s the image %s has been marked.',
+			chalk.green('Success: '),
+			req.body.cardid
+		);
+		res.status(200).send(true);
+	});
 });
 
 module.exports = router;

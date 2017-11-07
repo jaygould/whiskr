@@ -15,10 +15,10 @@ yesnoBtn.forEach(btn => {
 
 const _clickYes = () => {
 	let topCard = cardWrap.lastChild;
-	// CardsApi.markCard(
-	// 	topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
-	// 	'yes'
-	// );
+	CardsApi.markCard(
+		topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
+		'yes'
+	);
 	topCard.classList.add('spinOutYes');
 	topCard.addEventListener('transitionend', e => {
 		if (e.propertyName != 'transform') return;
@@ -28,10 +28,10 @@ const _clickYes = () => {
 };
 const _clickNo = () => {
 	let topCard = cardWrap.lastChild;
-	// CardsApi.markCard(
-	// 	topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
-	// 	'no'
-	// );
+	CardsApi.markCard(
+		topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
+		'no'
+	);
 	topCard.classList.add('spinOutNo');
 	topCard.addEventListener('transitionend', e => {
 		if (e.propertyName != 'transform') return;
