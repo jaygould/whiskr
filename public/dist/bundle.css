@@ -37,6 +37,9 @@ a:hover {
 h1 {
   font-family: 'adorable';
   font-size: 4em; }
+  @media (max-width: 425px) {
+    h1 {
+      font-size: 3em; } }
 
 .Welcome #header .siteTitle,
 .Home #header .siteTitle {
@@ -44,6 +47,15 @@ h1 {
 
 #header {
   padding: 50px 0px; }
+  @media (max-width: 414px) {
+    #header {
+      padding: 50px 0px; } }
+  @media (max-width: 375px) {
+    #header {
+      padding: 40px 0px; } }
+  @media (max-width: 320px) {
+    #header {
+      padding: 30px 0px; } }
   #header .siteTitle {
     text-align: center;
     color: #fff;
@@ -74,8 +86,13 @@ h1 {
     left: 50%;
     top: 100px;
     transform: translateZ(0) translateX(-50%); }
+    @media (max-width: 425px) {
+      .mainWrap .spinner {
+        width: 80px; } }
   .mainWrap .voteCount .voteInner {
     display: block;
+    position: absolute;
+    width: 100%;
     font-weight: 800;
     opacity: 1;
     transform: translateY(0%);
@@ -105,6 +122,10 @@ h1 {
       object-fit: cover;
       width: 350px;
       height: 450px; }
+      @media (max-width: 425px) {
+        #cardWrap .imgWrap .card {
+          width: 240px;
+          height: 320px; } }
     #cardWrap .imgWrap.spinOutYes {
       transform: translateX(100%) translateY(-100px) rotate(10deg);
       opacity: 0;
@@ -146,6 +167,15 @@ h1 {
   .yesnoBtnWrap .no {
     margin-right: 30px;
     background: #da1919; }
+  @media (max-width: 414px) {
+    .yesnoBtnWrap {
+      margin: 60px 0px; } }
+  @media (max-width: 375px) {
+    .yesnoBtnWrap {
+      margin: 50px 0px; } }
+  @media (max-width: 320px) {
+    .yesnoBtnWrap {
+      margin: 30px 0px; } }
 
 .yesnoBtnWrap.show {
   transition: opacity 300ms cubic-bezier(1, -0.27, 1, 1.2);

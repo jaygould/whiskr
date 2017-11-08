@@ -6,9 +6,14 @@
 		left: 50%;
 		top: 100px;
 		transform: translateZ(0) translateX(-50%);
+		@media (max-width: 425px) {
+			width: 80px;
+		}
 	}
 	.voteCount .voteInner {
 		display: block;
+		position: absolute;
+		width: 100%;
 		font-weight: 800;
 		opacity: 1;
 		transform: translateY(0%);
@@ -44,6 +49,10 @@
 			object-fit: cover;
 			width: 350px;
 			height: 450px;
+			@media (max-width: 425px) {
+				width: 240px;
+				height: 320px;
+			}
 		}
 		&.spinOutYes {
 			transform: translateX(100%) translateY(-100px) rotate(10deg);
@@ -93,6 +102,15 @@
 	.no {
 		margin-right: 30px;
 		background: #da1919;
+	}
+	@media (max-width: 414px) {
+		margin: 60px 0px;
+	}
+	@media (max-width: 375px) {
+		margin: 50px 0px;
+	}
+	@media (max-width: 320px) {
+		margin: 30px 0px;
 	}
 }
 .yesnoBtnWrap.show {

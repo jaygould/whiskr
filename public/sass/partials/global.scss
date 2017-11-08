@@ -42,4 +42,7 @@ a:hover {
 h1 {
 	font-family: 'adorable';
 	font-size: 4em;
+	@media (max-width: 425px) {
+		font-size: 3em;
+	}
 }
