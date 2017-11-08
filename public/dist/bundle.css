@@ -109,6 +109,10 @@ h1 {
       opacity: 0;
       transform: translateY(-200px);
       transition: opacity 1000ms ease-in-out, transform 800ms ease-in; }
+    @media (max-width: 320px) {
+      .mainWrap .voteCount .voteInner {
+        font-size: 22px;
+        z-index: 10; } }
 
 #cardWrap {
   opacity: 0;
@@ -126,6 +130,9 @@ h1 {
         #cardWrap .imgWrap .card {
           width: 240px;
           height: 320px; } }
+      @media (max-width: 320px) {
+        #cardWrap .imgWrap .card {
+          height: 310px; } }
     #cardWrap .imgWrap.spinOutYes {
       transform: translateX(100%) translateY(-100px) rotate(10deg);
       opacity: 0;
@@ -158,15 +165,21 @@ h1 {
     justify-content: center;
     color: #fff;
     transition: all 200ms; }
+    .yesnoBtnWrap a.yesno img {
+      width: 100%; }
     .yesnoBtnWrap a.yesno:hover {
-      color: #eee;
-      transform: scale(1.1); }
+      transform: scale(1.05);
+      cursor: pointer; }
   .yesnoBtnWrap .yes {
-    margin-left: 30px;
-    background: #28bf21; }
+    margin-left: 15px; }
+    @media (max-width: 320px) {
+      .yesnoBtnWrap .yes {
+        margin-left: 10px; } }
   .yesnoBtnWrap .no {
-    margin-right: 30px;
-    background: #da1919; }
+    margin-right: 15px; }
+    @media (max-width: 320px) {
+      .yesnoBtnWrap .no {
+        margin-right: 10px; } }
   @media (max-width: 414px) {
     .yesnoBtnWrap {
       margin: 60px 0px; } }
@@ -175,7 +188,7 @@ h1 {
       margin: 50px 0px; } }
   @media (max-width: 320px) {
     .yesnoBtnWrap {
-      margin: 30px 0px; } }
+      margin: 15px 0px; } }
 
 .yesnoBtnWrap.show {
   transition: opacity 300ms cubic-bezier(1, -0.27, 1, 1.2);

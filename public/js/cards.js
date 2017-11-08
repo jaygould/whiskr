@@ -9,7 +9,7 @@ const yesnoBtn = document.querySelectorAll('.yesno');
 
 yesnoBtn.forEach(btn => {
 	btn.addEventListener('click', e => {
-		e.target.classList.contains('yes') ? _clickYes() : _clickNo();
+		e.target.parentNode.classList.contains('yes') ? _clickYes() : _clickNo();
 	});
 });
 
@@ -72,7 +72,7 @@ const _getNewCard = () => {
 };
 
 const _randomRotateCard = element => {
-	let deg = Math.random() * (10 - -10) + -10;
+	let deg = Math.random() * (4 - -4) + -4;
 	element.style.transform = `rotate(${deg}deg)`;
 };
 
@@ -108,7 +108,7 @@ export const loadInitialCards = () => {
 export const randomRotateCards = () => {
 	const cards = document.getElementsByClassName('card');
 	for (var i = 0; i < cards.length; i++) {
-		let deg = Math.random() * (10 - -10) + -10;
+		let deg = Math.random() * (4 - -4) + -4;
 		cards[i].style.transform = `rotate(${deg}deg)`;
 	}
 };

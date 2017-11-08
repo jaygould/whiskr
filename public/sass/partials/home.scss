@@ -35,6 +35,10 @@
 			transform: translateY(-200px);
 			transition: opacity 1000ms ease-in-out, transform 800ms ease-in;
 		}
+		@media (max-width: 320px) {
+			font-size: 22px;
+			z-index: 10;
+		}
 	}
 }
 #cardWrap {
@@ -52,6 +56,9 @@
 			@media (max-width: 425px) {
 				width: 240px;
 				height: 320px;
+			}
+			@media (max-width: 320px) {
+				height: 310px;
 			}
 		}
 		&.spinOutYes {
@@ -90,19 +97,27 @@
 		justify-content: center;
 		color: #fff;
 		transition: all 200ms;
+		img {
+			width: 100%;
+		}
 		&:hover {
-			color: #eee;
-			transform: scale(1.1);
+			transform: scale(1.05);
+			cursor: pointer;
 		}
 	}
 	.yes {
-		margin-left: 30px;
-		background: #28bf21;
+		margin-left: 15px;
+		@media (max-width: 320px) {
+			margin-left: 10px;
+		}
 	}
 	.no {
-		margin-right: 30px;
-		background: #da1919;
+		margin-right: 15px;
+		@media (max-width: 320px) {
+			margin-right: 10px;
+		}
 	}
+
 	@media (max-width: 414px) {
 		margin: 60px 0px;
 	}
@@ -110,7 +125,7 @@
 		margin: 50px 0px;
 	}
 	@media (max-width: 320px) {
-		margin: 30px 0px;
+		margin: 15px 0px;
 	}
 }
 .yesnoBtnWrap.show {
