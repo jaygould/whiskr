@@ -14,7 +14,6 @@
     "body-parser": "1.17.2",
     "chalk": "2.1.0",
     "cheerio": "1.0.0-rc.2",
-    "command-scraper": "1.0.2",
     "compression": "1.7.0",
     "cors": "2.8.3",
     "dotenv": "4.0.0",

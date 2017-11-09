@@ -93,7 +93,7 @@ const _saveImage = (url, cb) => {
 			fs.writeFile(imgUrl, body, 'binary', err => {
 				if (err) throw err;
 				let card = new Card();
-				card.url = process.env.API_URL + '/' + publicImgUrl;
+				card.url = 'https://whiskr.co.uk' + publicImgUrl;
 				card.imageid = imgName;
 				card.save(err => {
 					if (err) return console.log(err);
