@@ -6,19 +6,19 @@ const router = express.Router();
 const scrape = require('./scraper/index');
 
 router.get('/scrape', (req, res) => {
-	const url = 'https://www.pexels.com/search/pet/';
+	const url =
+		'http://theberry.com/2011/05/05/daily-awww-kitty-cat-cuteness-right-here-33-photos/';
 	request(url, function(error, response, html) {
 		if (!error) {
 			var $ = cheerio.load(html);
 			let photos = [];
-			const imgWraps = $('.photos').children();
+			const imgWraps = $('.gallery-item-wrap img');
 			$(imgWraps).each((i, elem) => {
-				if ($(elem).attr('class') == 'photo-item') {
-					let url = $(elem)
-						.find('.photo-item__img')
-						.attr('src');
-					photos.push(url);
-				}
+				//if ($(elem).attr('class') == 'wp-caption') {
+				let url = $(elem).attr('src');
+				console.log(url);
+				photos.push(url);
+				//}
 			});
 
 			//send file contaning client side socket script to begin

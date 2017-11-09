@@ -37,7 +37,8 @@ exports.getUserApproval = (remoteUrl, res, req) => {
 					resolve('skipped');
 				});
 			})
-			.catch(() => {
+			.catch(e => {
+				console.log(e);
 				console.log(
 					'%s there has been a problem with the image conversion. Please check the images or content you\'re scraping',
 					chalk.red('Failed: ')
