@@ -19,8 +19,11 @@
 ## To do
 
 > * Link up voting and cards tables so each card displays the number of yes or no answers after user has cohsen theirs (animates in and out on click of yes or no)
+* Run web scraper from the CLI with parameters so images can be added via there
 * Add something to the UI to give it a bit of character... also update button styling as it crap atm
 * Mobile responsiveness
 * Swipe gesture and havr card follow the finger
 * Link up to heroku domain
 * Internet connection sutff
+* favicon
+* Image on welcome screen
