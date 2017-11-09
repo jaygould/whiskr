@@ -9,6 +9,7 @@ scraper(
 	'.post-content',
 	'.center',
 	'public/catImages',
+	false,
 	function(imgUrl) {
 		//image saved
 		console.log(imgUrl);
