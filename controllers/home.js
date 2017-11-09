@@ -1,5 +1,6 @@
 exports.index = (req, res) => {
 	res.render('home', {
-		title: 'Swipe!'
+		title: 'Swipe!',
+		page: 'home'
 	});
 };

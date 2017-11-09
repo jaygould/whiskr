@@ -14,7 +14,7 @@ export const startup = () => {
 		cards.style.height = innerHeight + 'px';
 	};
 
-	if (document.body.classList.contains('Home')) {
+	if (document.body.classList.contains('home')) {
 		loadInitialCards().then(() => {
 			randomRotateCards();
 			setImgWrapHeight();

@@ -85,7 +85,8 @@ h1 {
     position: absolute;
     left: 50%;
     top: 100px;
-    transform: translateZ(0) translateX(-50%); }
+    transform: translateZ(0) translateX(-50%);
+    width: 125px; }
     @media (max-width: 425px) {
       .mainWrap .spinner {
         width: 80px; } }
