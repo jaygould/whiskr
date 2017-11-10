@@ -79,12 +79,39 @@ const _randomRotateCard = element => {
 const _insertCard = (cardObj, isInitialLoad) => {
 	cardWrap.insertAdjacentHTML(
 		'afterbegin',
-		`<div class="imgWrap"><img class="card" data-votecount="${cardObj.voteCount}" data-id="${cardObj._id}" src="${cardObj.url}"></div>`
+		`<div id="${cardObj._id}" class="imgWrap"><img class="card" data-votecount="${cardObj.voteCount}" data-id="${cardObj._id}" src="${cardObj.url}"></div>`
 	);
+	// _initSwipeGesture(cardObj._id);
 	//if it's the first load, the cardaccum array is already populated, so only do it here on each new card insert
 	if (isInitialLoad) return;
 	cardAccum.push(cardObj);
 };
+
+// const _initSwipeGesture = cardId => {
+// 	let theCard = document.getElementById(cardId);
+// 	if (theCard) {
+// 		let longTouch = false;
+// 		let touchStartX = null;
+// 		let touchMoveX = null;
+//
+// 		theCard.addEventListener('touchstart', event => {
+// 			event.stopPropagation();
+// 			setTimeout(() => {
+// 				longTouch = true;
+// 			}, 250);
+// 			touchStartX = event.originalEvent.touches[0].pageX;
+// 		});
+// 		theCard.addEventListener('touchmove', event => {
+// 			event.stopPropagation();
+// 			setTimeout(() => {
+// 				longTouch = true;
+// 			}, 250);
+// 			touchMoveX = event.originalEvent.touches[0].pageX;
+// 			//GOT HALF WAY THROUGH TUTORIAL https://css-tricks.com/the-javascript-behind-touch-friendly-sliders/
+// 			//ALSO LOOK AT THIS AND DO SOME CLOSUERS!!! https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+// 		});
+// 	}
+// };
 
 export const loadInitialCards = () => {
 	return new Promise(resolve => {

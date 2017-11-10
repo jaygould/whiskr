@@ -23,7 +23,7 @@
 * Add something to the UI to give it a bit of character... also update button styling as it crap atm
 * Mobile responsiveness
 * Swipe gesture and havr card follow the finger
-* Link up to heroku domain
+> * Link up to heroku domain
 * Internet connection sutff
-* favicon
+> * favicon
 * Image on welcome screen
