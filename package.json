@@ -21,6 +21,7 @@
     "express": "4.15.3",
     "express-status-monitor": "1.0.0",
     "fs": "0.0.1-security",
+    "hammerjs": "2.0.8",
     "http": "0.0.0",
     "https": "1.0.0",
     "inquirer": "3.3.0",

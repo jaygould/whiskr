@@ -44,11 +44,16 @@
 }
 #cardWrap {
 	opacity: 0;
-	overflow: auto;
+	overflow: visible;
 	.imgWrap {
 		position: absolute;
-		left: 50%;
-		transform: translateZ(0) translateX(-50%);
+		left: calc(50% - 175px);
+		@media (max-width: 425px) {
+			width: 240px;
+			height: 320px;
+			left: calc(50% - 120px);
+		}
+		transform: translate3d(0, 0, 0);
 		transition: transform 100ms;
 		.card {
 			object-fit: cover;
@@ -63,12 +68,12 @@
 			}
 		}
 		&.spinOutYes {
-			transform: translateX(100%) translateY(-100px) rotate(10deg);
+			transform: translateX(100%) translateY(-100px) rotate(10deg) !important;
 			opacity: 0;
 			transition: all 400ms ease-in-out;
 		}
 		&.spinOutNo {
-			transform: translateX(-150%) translateY(-100px) rotate(-10deg);
+			transform: translateX(-150%) translateY(-100px) rotate(-10deg) !important;
 			opacity: 0;
 			transition: all 400ms ease-in-out;
 		}
@@ -104,6 +109,10 @@
 		&:hover {
 			transform: scale(1.05);
 			cursor: pointer;
+		}
+		@media (max-width: 320px) {
+			width: 80px;
+			height: 80px;
 		}
 	}
 	.yes {

@@ -117,12 +117,17 @@ h1 {
 
 #cardWrap {
   opacity: 0;
-  overflow: auto; }
+  overflow: visible; }
   #cardWrap .imgWrap {
     position: absolute;
-    left: 50%;
-    transform: translateZ(0) translateX(-50%);
+    left: calc(50% - 175px);
+    transform: translate3d(0, 0, 0);
     transition: transform 100ms; }
+    @media (max-width: 425px) {
+      #cardWrap .imgWrap {
+        width: 240px;
+        height: 320px;
+        left: calc(50% - 120px); } }
     #cardWrap .imgWrap .card {
       object-fit: cover;
       width: 350px;
@@ -135,11 +140,11 @@ h1 {
         #cardWrap .imgWrap .card {
           height: 310px; } }
     #cardWrap .imgWrap.spinOutYes {
-      transform: translateX(100%) translateY(-100px) rotate(10deg);
+      transform: translateX(100%) translateY(-100px) rotate(10deg) !important;
       opacity: 0;
       transition: all 400ms ease-in-out; }
     #cardWrap .imgWrap.spinOutNo {
-      transform: translateX(-150%) translateY(-100px) rotate(-10deg);
+      transform: translateX(-150%) translateY(-100px) rotate(-10deg) !important;
       opacity: 0;
       transition: all 400ms ease-in-out; }
 
@@ -171,6 +176,10 @@ h1 {
     .yesnoBtnWrap a.yesno:hover {
       transform: scale(1.05);
       cursor: pointer; }
+    @media (max-width: 320px) {
+      .yesnoBtnWrap a.yesno {
+        width: 80px;
+        height: 80px; } }
   .yesnoBtnWrap .yes {
     margin-left: 15px; }
     @media (max-width: 320px) {

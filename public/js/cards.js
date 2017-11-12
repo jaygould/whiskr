@@ -1,5 +1,5 @@
 import CardsApi from './api';
-
+import Hammer from 'hammerjs';
 //keep global array of all cards that are being displayed in this session
 let cardAccum = [];
 
@@ -81,34 +81,74 @@ const _insertCard = (cardObj, isInitialLoad) => {
 		'afterbegin',
 		`<div id="${cardObj._id}" class="imgWrap"><img class="card" data-votecount="${cardObj.voteCount}" data-id="${cardObj._id}" src="${cardObj.url}"></div>`
 	);
-	// _initSwipeGesture(cardObj._id);
+	_initSwipeGesture(cardObj._id);
 	//if it's the first load, the cardaccum array is already populated, so only do it here on each new card insert
 	if (isInitialLoad) return;
 	cardAccum.push(cardObj);
 };
 
+const _initSwipeGesture = cardId => {
+	let theCard = document.getElementById(cardId);
+	var hammertime = new Hammer(theCard);
+	hammertime.on('pan', function(ev) {
+		var percentage = 100 * ev.deltaX / window.innerWidth; // NEW: our % calc
+
+		theCard.style.transform =
+			'translate3d(' + percentage + '%,0,0) rotate(' + percentage / 10 + 'deg)';
+		if (ev.isFinal) {
+			console.log(ev);
+			if (ev.velocityX > 1) {
+				//card exit
+				_clickYes();
+			} else if (ev.velocityX < -1) {
+				_clickNo();
+				//card exit other way
+			} else {
+				if (ev.deltaX > 100) {
+					_clickYes();
+				} else if (ev.deltaX < -100) {
+					_clickNo();
+				}
+				setTimeout(() => {
+					theCard.style.transform = 'translate3d(0,0,0)';
+				}, 80);
+			}
+		}
+		//theCard.style.transform = 'translateX(' + percentage + '%)'; // NEW: our CSS transform
+	});
+};
 // const _initSwipeGesture = cardId => {
 // 	let theCard = document.getElementById(cardId);
+// 	let theCardImg = theCard.getElementsByClassName('card')[0];
 // 	if (theCard) {
 // 		let longTouch = false;
 // 		let touchStartX = null;
 // 		let touchMoveX = null;
-//
+// 		let moveX = null;
 // 		theCard.addEventListener('touchstart', event => {
-// 			event.stopPropagation();
 // 			setTimeout(() => {
 // 				longTouch = true;
 // 			}, 250);
-// 			touchStartX = event.originalEvent.touches[0].pageX;
+// 			touchStartX = event.touches[0].pageX;
 // 		});
 // 		theCard.addEventListener('touchmove', event => {
-// 			event.stopPropagation();
-// 			setTimeout(() => {
-// 				longTouch = true;
-// 			}, 250);
-// 			touchMoveX = event.originalEvent.touches[0].pageX;
+// 			touchMoveX = event.touches[0].pageX;
+// 			moveX = theCardImg.offsetWidth + (touchStartX - touchMoveX);
+// 			theCard.style.transform = 'translate3d(-' + (moveX - 160) + 'px,0,0)';
+// 			var panX = 100 - moveX;
+// 			if (panX < 100) {
+// 				// Corrects an edge-case problem where the background image moves without the container moving.
+// 			}
+//
 // 			//GOT HALF WAY THROUGH TUTORIAL https://css-tricks.com/the-javascript-behind-touch-friendly-sliders/
 // 			//ALSO LOOK AT THIS AND DO SOME CLOSUERS!!! https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+// 		});
+// 		theCard.addEventListener('touchend', event => {
+// 			let absMove = Math.abs(theCardImg.offsetWidth - moveX);
+// 			if (longTouch == false) {
+// 				console.log('longtouch');
+// 			}
+// 			theCard.style.transform = 'translate3d(-50%,0,0)';
 // 		});
 // 	}
 // };
