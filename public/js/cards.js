@@ -1,5 +1,6 @@
 import CardsApi from './api';
 import Hammer from 'hammerjs';
+
 //keep global array of all cards that are being displayed in this session
 let cardAccum = [];
 
@@ -96,13 +97,10 @@ const _initSwipeGesture = cardId => {
 		theCard.style.transform =
 			'translate3d(' + percentage + '%,0,0) rotate(' + percentage / 10 + 'deg)';
 		if (ev.isFinal) {
-			console.log(ev);
 			if (ev.velocityX > 1) {
-				//card exit
 				_clickYes();
 			} else if (ev.velocityX < -1) {
 				_clickNo();
-				//card exit other way
 			} else {
 				if (ev.deltaX > 100) {
 					_clickYes();

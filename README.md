@@ -27,3 +27,8 @@
 * Internet connection sutff
 > * favicon
 * Image on welcome screen
+
+
+last commit -m "Updated responsiveness for small phne screens to get all content in view on page load, and auto scroll the page down too just in case"
+
+Make OO and functional examples?

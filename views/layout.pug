@@ -6,6 +6,8 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='theme-color' content='#4DA5F4')
     meta(name='csrf-token', content=_csrf)
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='mobile-web-app-capable', content='yes')
     title Whiskr - #{title}
     link(rel='shortcut icon', href='/img/favicon.png?a=3')
     link(rel='stylesheet', href='/dist/bundle.css')
@@ -17,7 +19,7 @@ html
     .container
       block content
   
-    #footer.container
+    #footer
       include partials/footer
 
     script(src='/dist/bundle.js')

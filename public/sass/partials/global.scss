@@ -2,6 +2,10 @@
 	font-family: 'adorable';
 	src: url('./../fonts/adorable.otf');
 }
+@font-face {
+	font-family: 'akrobat';
+	src: url('./../fonts/Akrobat-Light.otf');
+}
 @keyframes Gradient {
 	0% {
 		background-position: 0% 50%;
@@ -17,6 +21,7 @@
 html,
 body {
 	height: 100%;
+	box-sizing: border-box;
 }
 
 body {
@@ -38,6 +43,10 @@ a {
 }
 a:hover {
 	color: #e3e3e3;
+}
+p,
+span {
+	font-family: akrobat;
 }
 h1 {
 	font-family: 'adorable';
