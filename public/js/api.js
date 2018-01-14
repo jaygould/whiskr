@@ -40,5 +40,18 @@ class CardsApi {
 				throw error;
 			});
 	}
+	static markCardCatDog(cardid, catordog) {
+		return fetch('/api/card/markCardCatDog', {
+			method: 'POST',
+			body: JSON.stringify({ cardid: cardid, catordog: catordog }),
+			headers: config.configHeaders
+		})
+			.then(response => {
+				return response.json();
+			})
+			.catch(error => {
+				throw error;
+			});
+	}
 }
 export default CardsApi;

@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var cardsSchema = new Schema({
 	url: String,
-	imageid: String
+	imageid: String,
+	type: String
 });
 
 cardsSchema.pre('save', function(next) {

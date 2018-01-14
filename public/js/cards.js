@@ -7,10 +7,16 @@ let cardAccum = [];
 const mainWrap = document.getElementsByClassName('mainWrap')[0];
 const cardWrap = document.getElementById('cardWrap');
 const yesnoBtn = document.querySelectorAll('.yesno');
+const catDogBtn = document.querySelectorAll('.catDog');
 
 yesnoBtn.forEach(btn => {
 	btn.addEventListener('click', e => {
 		e.target.parentNode.classList.contains('yes') ? _clickYes() : _clickNo();
+	});
+});
+catDogBtn.forEach(btn => {
+	btn.addEventListener('click', e => {
+		e.target.classList.contains('cat') ? _clickCat() : _clickDog();
 	});
 });
 
@@ -30,6 +36,25 @@ const _clickNo = () => {
 		'no'
 	);
 	topCard.classList.add('spinOutNo');
+	popCard(topCard, 'no');
+};
+
+const _clickCat = () => {
+	let topCard = cardWrap.lastChild;
+	CardsApi.markCardCatDog(
+		topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
+		'cat'
+	);
+	topCard.classList.add('spinOutYes');
+	popCard(topCard, 'yes');
+};
+const _clickDog = () => {
+	let topCard = cardWrap.lastChild;
+	CardsApi.markCardCatDog(
+		topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
+		'dog'
+	);
+	topCard.classList.add('spinOutYes');
 	popCard(topCard, 'no');
 };
 

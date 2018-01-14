@@ -49,6 +49,7 @@ app.use(errorHandler());
 //App routes
 app.get('/', indexController.index);
 app.get('/home', homeController.index);
+app.get('/home/admin', homeController.index);
 
 //API routes
 app.use('/api', apiController);

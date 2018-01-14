@@ -74,6 +74,69 @@ router.post('/card/markCard', (req, res) => {
 	});
 });
 
+router.post('/card/markCardCatDog', (req, res) => {
+	let cardId = req.body.cardid;
+	let catordog = req.body.catordog;
+	// Card.findById(cardId, (err, theCard) => {
+	// 	console.log('CALLBACK', theCard);
+	// });
+	//
+	// Card.findById(cardId).then(theCard => {
+	// 	console.log('THEN', theCard);
+	// });
+	//
+	//console.log('without', Card.findById(cardId));
+	// console.log('with', Card.findById(cardId).exec());
+
+	// Promise.all([Card.findById(cardId), Card.findById(cardId)]).then(resp => {
+	// 	console.log('eeeeee', resp);
+	// });
+
+	// Card.findById(cardId)
+	// 	.then(theCard => {
+	// 		console.log('THEN', theCard);
+	// 	})
+	// 	.catch(err => {
+	// 		console.log('ERR', err);
+	// 	});
+
+	// Card.findById(2)
+	// 	.exec()
+	// 	.then(theCard => {
+	// 		console.log('EXEC', theCard);
+	// 	})
+	// 	.catch(err => {
+	// 		console.log('ECEX ERR', err);
+	// 	});
+
+	// Card.findById(cardId)
+	// 	.limit(10)
+	// 	// .exec()
+	// 	.then(theCard => {
+	// 		return Card.findOneAndUpdate({ _id: theCard }, { type: catordog });
+	// 	})
+	// 	.then(updated => {
+	// 		console.log(updated);
+	// 	})
+	// 	.catch(err => {
+	// 		console.log(err);
+	// 	});
+
+	Card.find()
+		.where('_id')
+		.equals(cardId)
+		// .exec()
+		.then(theCard => {
+			return Card.findOneAndUpdate({ _id: theCard }, { type: catordog });
+		})
+		.then(updated => {
+			res.status(200).send(true);
+		})
+		.catch(err => {
+			res.status(200).send(false);
+		});
+});
+
 module.exports = router;
 
 const _getCardVotes = (cardid, cb) => {

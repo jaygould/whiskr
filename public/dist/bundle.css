@@ -275,3 +275,8 @@ h1 {
   transition: opacity 300ms cubic-bezier(1, -0.27, 1, 1.2);
   opacity: 1 !important;
   will-change: opacity; }
+
+.catDogBtnWrap {
+  text-align: center;
+  z-index: 100;
+  position: relative; }
