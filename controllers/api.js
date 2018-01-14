@@ -34,6 +34,7 @@ router.post('/card/getFirstCards', (req, res) => {
 
 router.post('/card/getNextCard', (req, res) => {
 	let currentArr = _.map(req.body.cardAccum, '_id');
+	let catDogFilter = req.body.catDogFilter;
 	Card.find({}).exec((err, cards) => {
 		if (err) res.status(400).send(err);
 		let cardsShuffled = _.shuffle(cards);
@@ -41,6 +42,13 @@ router.post('/card/getNextCard', (req, res) => {
 
 		for (let i = 0; i < cardsShuffled.length; i++) {
 			if (_.includes(currentArr, String(cardsShuffled[i]._id))) {
+				continue;
+			}
+
+			if (!catDogFilter.dog && cardsShuffled[i].type == 'dog') {
+				continue;
+			}
+			if (!catDogFilter.cat && cardsShuffled[i].type == 'cat') {
 				continue;
 			}
 			chosenCard = cardsShuffled[i];

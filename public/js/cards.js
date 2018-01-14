@@ -1,6 +1,6 @@
 import CardsApi from './api';
 import Hammer from 'hammerjs';
-
+import { catDogFilter } from './sideMenu';
 //keep global array of all cards that are being displayed in this session
 let cardAccum = [];
 
@@ -11,54 +11,58 @@ const catDogBtn = document.querySelectorAll('.catDog');
 
 yesnoBtn.forEach(btn => {
 	btn.addEventListener('click', e => {
-		e.target.parentNode.classList.contains('yes') ? _clickYes() : _clickNo();
+		e.target.parentNode.classList.contains('yes')
+			? _clickYes(catDogFilter)
+			: _clickNo(catDogFilter);
 	});
 });
 catDogBtn.forEach(btn => {
 	btn.addEventListener('click', e => {
-		e.target.classList.contains('cat') ? _clickCat() : _clickDog();
+		e.target.classList.contains('cat')
+			? _clickCat(catDogFilter)
+			: _clickDog(catDogFilter);
 	});
 });
 
-const _clickYes = () => {
+const _clickYes = catDogFilter => {
 	let topCard = cardWrap.lastChild;
 	CardsApi.markCard(
 		topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
 		'yes'
 	);
 	topCard.classList.add('spinOutYes');
-	popCard(topCard, 'yes');
+	popCard(topCard, 'yes', catDogFilter);
 };
-const _clickNo = () => {
+const _clickNo = catDogFilter => {
 	let topCard = cardWrap.lastChild;
 	CardsApi.markCard(
 		topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
 		'no'
 	);
 	topCard.classList.add('spinOutNo');
-	popCard(topCard, 'no');
+	popCard(topCard, 'no', catDogFilter);
 };
 
-const _clickCat = () => {
+const _clickCat = catDogFilter => {
 	let topCard = cardWrap.lastChild;
 	CardsApi.markCardCatDog(
 		topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
 		'cat'
 	);
 	topCard.classList.add('spinOutYes');
-	popCard(topCard, 'yes');
+	popCard(topCard, 'yes', catDogFilter);
 };
-const _clickDog = () => {
+const _clickDog = catDogFilter => {
 	let topCard = cardWrap.lastChild;
 	CardsApi.markCardCatDog(
 		topCard.getElementsByClassName('card')[0].getAttribute('data-id'),
 		'dog'
 	);
 	topCard.classList.add('spinOutYes');
-	popCard(topCard, 'no');
+	popCard(topCard, 'no', catDogFilter);
 };
 
-const popCard = (topCard, yesorno) => {
+const popCard = (topCard, yesorno, catDogFilter) => {
 	applyVoteCount(
 		topCard.getElementsByClassName('card')[0].getAttribute('data-votecount'),
 		yesorno
@@ -66,7 +70,7 @@ const popCard = (topCard, yesorno) => {
 	topCard.addEventListener('transitionend', e => {
 		if (e.propertyName != 'transform') return;
 		cardWrap.removeChild(topCard);
-		_getNewCard();
+		_getNewCard(catDogFilter);
 	});
 };
 const applyVoteCount = (voteCount, yesorno) => {
@@ -83,12 +87,12 @@ const applyVoteCount = (voteCount, yesorno) => {
 	}, 100);
 };
 
-const _getNewCard = () => {
-	CardsApi.getNextCard(cardAccum).then(response => {
+const _getNewCard = catDogFilter => {
+	CardsApi.getNextCard(cardAccum, catDogFilter).then(response => {
 		if (response.refresh) {
 			//reached end of randomised images - empty local accum array and start again
 			cardAccum = [];
-			_getNewCard();
+			_getNewCard(catDogFilter);
 			return;
 		}
 		_insertCard(response);

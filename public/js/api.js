@@ -14,10 +14,13 @@ class CardsApi {
 				throw error;
 			});
 	}
-	static getNextCard(cardAccum) {
+	static getNextCard(cardAccum, catDogFilter) {
 		return fetch('/api/card/getNextCard', {
 			method: 'POST',
-			body: JSON.stringify({ cardAccum: cardAccum }),
+			body: JSON.stringify({
+				cardAccum: cardAccum,
+				catDogFilter: catDogFilter || null
+			}),
 			headers: config.configHeaders
 		})
 			.then(response => {
