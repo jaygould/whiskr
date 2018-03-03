@@ -22,6 +22,7 @@ html,
 body {
 	height: 100%;
 	box-sizing: border-box;
+	overflow: auto;
 }
 
 body {
@@ -54,4 +55,8 @@ h1 {
 	@media (max-width: 425px) {
 		font-size: 3em;
 	}
+}
+.container {
+	position: relative;
+	z-index: 10;
 }
