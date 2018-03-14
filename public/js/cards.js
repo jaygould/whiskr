@@ -129,14 +129,14 @@ const _initSwipeGesture = cardId => {
 			'translate3d(' + percentage + '%,0,0) rotate(' + percentage / 10 + 'deg)';
 		if (ev.isFinal) {
 			if (ev.velocityX > 1) {
-				_clickYes();
+				_clickYes(catDogFilter);
 			} else if (ev.velocityX < -1) {
-				_clickNo();
+				_clickNo(catDogFilter);
 			} else {
 				if (ev.deltaX > 100) {
-					_clickYes();
+					_clickYes(catDogFilter);
 				} else if (ev.deltaX < -100) {
-					_clickNo();
+					_clickNo(catDogFilter);
 				}
 				setTimeout(() => {
 					theCard.style.transform = 'translate3d(0,0,0)';
