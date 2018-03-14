@@ -18,9 +18,12 @@ router.post('/card/getFirstCards', (req, res) => {
 		});
 		//loop through the initial cards and use Promises to assist in retrieving the card vote count
 		let promiseArr = startingCards.map(card => {
+			console.log(card);
 			return new Promise(resolve => {
 				_getCardVoteCount(card, results => {
 					card = card.toJSON();
+					let cloudinaryUrl = `http://res.cloudinary.com/jaygould/image/upload/${card.imageid}`;
+					card.cloudinaryUrl = cloudinaryUrl || null;
 					card.voteCount = results;
 					resolve(card);
 				});
@@ -58,6 +61,8 @@ router.post('/card/getNextCard', (req, res) => {
 			//get count of votes for chosen card
 			_getCardVoteCount(chosenCard, (results, err) => {
 				chosenCard = chosenCard.toJSON();
+				let cloudinaryUrl = `http://res.cloudinary.com/jaygould/image/upload/${chosenCard.imageid}`;
+				chosenCard.cloudinaryUrl = cloudinaryUrl || null;
 				chosenCard.voteCount = results;
 				res.status(200).send(chosenCard);
 			});

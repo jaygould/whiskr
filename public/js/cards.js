@@ -107,9 +107,11 @@ const _randomRotateCard = element => {
 };
 
 const _insertCard = (cardObj, isInitialLoad) => {
+	console.log('cardObj', cardObj);
 	cardWrap.insertAdjacentHTML(
 		'afterbegin',
-		`<div id="${cardObj._id}" class="imgWrap"><img class="card" data-votecount="${cardObj.voteCount}" data-id="${cardObj._id}" src="${cardObj.url}"></div>`
+		`<div id="${cardObj._id}" class="imgWrap"><img class="card" data-votecount="${cardObj.voteCount}" data-id="${cardObj._id}" src="${cardObj.cloudinaryUrl ||
+			cardObj.url}"></div>`
 	);
 	_initSwipeGesture(cardObj._id);
 	//if it's the first load, the cardaccum array is already populated, so only do it here on each new card insert
