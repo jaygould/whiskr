@@ -6,6 +6,13 @@ const Jimp = require('jimp');
 const shortid = require('shortid');
 const inquirer = require('inquirer');
 const Card = require('../../util/Cards');
+var cloudinary = require('cloudinary');
+
+cloudinary.config({
+	cloud_name: 'jaygould',
+	api_key: '261729422894596',
+	api_secret: 'R3_WejsZ2f6ll5KhUBu1paVT-kw'
+});
 
 exports.getUserApproval = (remoteUrl, res, req) => {
 	return new Promise((resolve, reject) => {
@@ -98,6 +105,16 @@ const _saveImage = (url, cb) => {
 				card.imageid = imgName;
 				card.save(err => {
 					if (err) return console.log(err);
+					// upload to cloudinary
+					cloudinary.v2.uploader.upload(
+						imgUrl,
+						{ use_filename: true },
+						(error, result) => {
+							console.log(result);
+						}
+					);
+
+					_uploadToCloud(card);
 					console.log(
 						'%s the image %s has been saved.',
 						chalk.green('Success: '),
@@ -108,4 +125,8 @@ const _saveImage = (url, cb) => {
 			});
 		});
 	});
+};
+
+const _uploadToCloud = card => {
+	console.log(card);
 };
