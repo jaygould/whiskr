@@ -108,7 +108,7 @@ const _saveImage = (url, cb) => {
 					// upload to cloudinary
 					cloudinary.v2.uploader.upload(
 						imgUrl,
-						{ use_filename: true },
+						{ use_filename: true, unique_filename: false },
 						(error, result) => {
 							console.log(result);
 						}

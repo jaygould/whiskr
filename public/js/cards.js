@@ -24,6 +24,21 @@ catDogBtn.forEach(btn => {
 	});
 });
 
+//used to mark as a cat or a dog in admin area
+// document.addEventListener(
+// 	'keydown',
+// 	event => {
+// 		const keyName = event.key;
+// 		console.log(keyName);
+// 		if (keyName == 'ArrowLeft') {
+// 			_clickCat(catDogFilter);
+// 		} else if (keyName == 'ArrowRight') {
+// 			_clickDog(catDogFilter);
+// 		}
+// 	},
+// 	false
+// );
+
 const _clickYes = catDogFilter => {
 	let topCard = cardWrap.lastChild;
 	CardsApi.markCard(

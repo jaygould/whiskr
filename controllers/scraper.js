@@ -7,12 +7,13 @@ const scrape = require('./scraper/index');
 
 router.get('/scrape', (req, res) => {
 	const url =
-		'http://theberry.com/2011/05/05/daily-awww-kitty-cat-cuteness-right-here-33-photos/';
+		// 'http://theberry.com/2011/05/05/daily-awww-kitty-cat-cuteness-right-here-33-photos/';
+		'https://stocksnap.io/search/dog/';
 	request(url, function(error, response, html) {
 		if (!error) {
 			var $ = cheerio.load(html);
 			let photos = [];
-			const imgWraps = $('.gallery-item-wrap img');
+			const imgWraps = $('#main img');
 			$(imgWraps).each((i, elem) => {
 				//if ($(elem).attr('class') == 'wp-caption') {
 				let url = $(elem).attr('src');
